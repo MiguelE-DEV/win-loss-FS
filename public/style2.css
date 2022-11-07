@@ -1,0 +1,17 @@
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+  color: black;
+  background: rgb(85, 0, 255);
+  background: linear-gradient(90deg, rgb(93, 0, 255) 36%, rgb(184, 141, 76) 63%);
+}
+p{
+  color:black;
+}
+img{
+  height: 200px;
+}
+.jumbotron{
+  background-color: #201428bb;
+}
+
