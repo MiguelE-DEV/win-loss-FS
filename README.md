@@ -1,3 +1,6 @@
+## Description
+A Recording of match history. Shows chosen character and win/loss of that match.
+
 ## Installation
 
 1. Clone repo
