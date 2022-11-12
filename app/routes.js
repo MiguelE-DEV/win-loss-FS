@@ -1,4 +1,6 @@
- module.exports = function(app, passport, db) {
+const { ObjectId } = require("mongodb");
+ 
+ module.exports = function(app, passport, db, objectId) {
 
 // normal routes ===============================================================
 
@@ -38,64 +40,33 @@
         res.redirect('/profile')
       })
     })
-// thumbs up and thumbs down logic
     app.put('/changeHistory', (req, res) => {
-      db.collection('matchHistory')
-      .findOneAndUpdate({
-        pOne: req.body.pOne,
-        pTwo: req.body.pTwo
+      db.collection('matchHistory').findOneAndUpdate(
+        {
+        _id: objectId(req.body._id),
       }, {
         $set: {
-          thumbUp:req.body.thumbUp + 1,
+          _id: ObjectId(req.body._id),
+          win: req.body.win, 
+          loss: req.body.loss
         }
       }, {
         sort: {_id: -1},
-        upsert: true
+        upsert: false
       }, (err, result) => {
         if (err) return res.send(err)
         res.send(result)
       })
     })
-
-    app.put('/messages-1', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({
-        name: req.body.name,
-        msg: req.body.msg
-      }, 
-        {$set: {
-          thumbUp:req.body.thumbUp - 1,
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
-    //Another way to do sort-
-    // app.get("/", (req, res) => {
-    //   db.collection("songCollection")
-    //     .find()
-    //     .toArray((err, allDocuments) => {
-    //       // sort logic
-    //       // stackoverflow help
-    //       allDocuments.sort((a, b) => parseFloat(b.upVote) - parseFloat(a.upVote));
-      
-    //       if (err) return console.log(err);
-    //       res.render("index.ejs", { playlistCollection: allDocuments });
-    //     });
-    // });
     app.delete('/newDelete', (req, res) => {
       db.collection('matchHistory').findOneAndDelete({
         pOne: req.body.pOne,
-        pTwo: req.body.pTwo
+        _id: ObjectId(req.body._id)
       }, (err, result) => {
         if (err) return res.send(500, err)
-        res.send('Message deleted!')
-      })
-    })
+        res.send(result)
+      });
+    });
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================

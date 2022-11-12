@@ -42,9 +42,12 @@
           <% for(var i=0; i<matches.length; i++) {%>
             <li class="matches">
               <span><%= matches[i].pOne %></span>
+              <span>VS</span>
               <span><%= matches[i].pTwo %></span>
-              <span><%= matches[i].win %></span>
-              <span><%= matches[i].loss %></span>
+              <span class="winNum"><%= matches[i].win %></span>
+              <span>-</span>
+              <span class="lossNum"><%= matches[i].loss %></span>
+              <span class="hidden"><%=matches[i]._id %></span>
               <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
               <span><i class="fa fa-trash-o" aria-hidden="true"></i></span>
             </li>

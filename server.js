@@ -10,7 +10,7 @@ const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
-
+var objectId = require('mongodb').ObjectId
 //'middleware middle man
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -18,6 +18,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
+const { ObjectID } = require('mongodb');
 
 var db
 
@@ -25,7 +26,7 @@ var db
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db);
+  require('./app/routes.js')(app, passport, db, objectId);
 }); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
