@@ -1,5 +1,5 @@
 ## Description
-A Recording of match history. Shows chosen character and win/loss of that match.
+# A Recording of match history. Shows chosen character and win/loss of that match.
 ![ggstWinLoseBackground](https://user-images.githubusercontent.com/112410929/201448557-4ad7c437-b666-4ca4-ab02-1aedba737f83.jpg)
 
 ## Installation
